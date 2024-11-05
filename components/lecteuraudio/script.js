@@ -56,6 +56,28 @@ export class MyAudioPlayer extends HTMLElement {
         // this.create3DVisualization();
     }
 
+    static get observedAttributes() {
+        return ['src'];
+    }
+
+   // Respond to attribute changes
+   attributeChangedCallback(name, oldValue, newValue) {
+    if (name === 'src' && newValue !== oldValue) {
+        const player = this.shadowroot.querySelector('#player');
+        
+        // Check if the player element exists
+        if (player) {
+            player.src = newValue;
+            player.load(); // Reload audio when src changes
+            console.log("src changed to", newValue);
+        } else {
+            console.warn("Player element not found in shadow DOM");
+        }
+    }
+}
+
+
+
     buildAudioGraph() {
         let player = this.shadowroot.querySelector('#player');
         player.src = this.src;
@@ -102,6 +124,8 @@ export class MyAudioPlayer extends HTMLElement {
       // event pour le changement de volume
         this.shadowroot.querySelector('#volume').addEventListener('change', () => {
             player.volume = this.shadowroot.querySelector('#volume').value;
+            // log maximum value of player.volume
+            console.log(player.volume);
         });
         // event pour augmenter la vitesse de lecture id composant speedup
         this.shadowroot.querySelector('#speedup').addEventListener('click', () => {
@@ -112,11 +136,16 @@ export class MyAudioPlayer extends HTMLElement {
             player.playbackRate -= 0.1;
         });
 
-            // ecouteur pour la progression de la lecture
-            player.addEventListener('timeupdate', () => {
+        // ecouteur pour la progression de la lecture
+        player.addEventListener('timeupdate', () => {
             let progress = this.shadowroot.querySelector('#progress');
-            progress.value = player.currentTime / player.duration * 100;
-            });
+            
+            // Ensure player.duration is a valid number
+            if (!isNaN(player.duration)) {
+                progress.value = (player.currentTime / player.duration) * 100;
+            }
+        });
+
 
         // ecouteur pour click sur la progression et positionner la lecture
         this.shadowroot.querySelector('#progress').addEventListener('click', (event) => {

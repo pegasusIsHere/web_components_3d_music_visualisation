@@ -1,0 +1,53 @@
+:host {
+    display: block;
+    max-width: 400px;
+    margin: auto;
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    color: #fff;
+  }
+  
+  h1 {
+    text-align: center;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    background: none;
+    border: 2px solid #fff;
+    color: #fff;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+  }
+  
+  button:hover {
+    background-color: #fff;
+    color: #000;
+  }
+  
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  input[type="range"], progress {
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  progress {
+    height: 10px;
+    background-color: #444;
+  }
+  
+  progress::-webkit-progress-value {
+    background-color: #0073e6;
+  }
+  
