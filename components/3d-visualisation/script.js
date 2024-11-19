@@ -13,14 +13,16 @@ class Visualisation3d extends HTMLElement {
         // Attaching shadow root without assigning it directly
         this.attachShadow({ mode: 'open' });
         this.baseURL = getBaseURL();
+        
     }
-
+    
     async connectedCallback() {
         const STYLE = `<link rel="stylesheet" href="${this.baseURL + 'style.css'}">`;
         const HTML = await loadHTML(this.baseURL, '/components/3d-visualisation/index.html');
         // Insert HTML and Canvas into Shadow DOM
         this.shadowRoot.innerHTML = `${STYLE}${HTML}`;
-
+        this.animationGroup = null; // To store the animation group of the model
+        this.mytag = "ayoubhofr"
         
         // Ensure #render element exists
         this.canvas = this.shadowRoot.querySelector('#render');
@@ -42,6 +44,33 @@ class Visualisation3d extends HTMLElement {
 
         // Initialize the Babylon scene
         this.create3DVisualization();
+
+    }
+
+    // import animted model
+    importModels(scene,camera) {
+
+        BABYLON.SceneLoader.ImportMesh("", this.baseURI+"components/3d-visualisation/models/", "dancer.glb", scene,  (newMeshes, particleSystems, skeletons, animationGroups) =>    {
+            // Set the target of the camera to the first imported mesh
+            newMeshes[0].position = new BABYLON.Vector3(0, 0, 0);
+            // newMeshes[0].scaling = new BABYLON.Vector3(5,5,5);
+            camera.target = newMeshes[0];
+            // Store the animation group for controlling animations
+            this.animationGroup = animationGroups[0];
+
+            if (this.animationGroup) {
+                this.animationGroup.stop(); // Stop animation immediately after loading
+            }
+        });
+    }
+    toggleAnimation(playing) {
+        if (this.animationGroup) {
+            if (playing) {
+                this.animationGroup.start(true); // Resume animation
+            } else {
+                this.animationGroup.stop(); // Pause animation
+            }
+        }
     }
 
     create3DVisualization() {
@@ -83,11 +112,14 @@ class Visualisation3d extends HTMLElement {
         });
 
         // Run the render loop
+        this.importModels(scene,camera)
         engine.runRenderLoop(() => {
             scene.render();
             if (this.analyser)
-            this.updateVisualization(scene);
+                this.updateVisualization(scene);
+
         });
+
     }
 
     updateVisualization(scene) {
@@ -104,6 +136,11 @@ class Visualisation3d extends HTMLElement {
             const intensity = scale / 2;
             box.material.diffuseColor = new BABYLON.Color3(0.5 + intensity, 0.3, 1 - intensity);
         });
+        if(dataArray[0]>0)
+            this.toggleAnimation(true)
+        else
+            this.toggleAnimation(false)
+
     }
 
     getAnalyser() {
