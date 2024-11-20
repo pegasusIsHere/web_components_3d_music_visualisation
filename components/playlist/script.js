@@ -22,7 +22,7 @@ export class PlayList extends HTMLElement {
 
     async connectedCallback() {
         let STYLE = `<link rel="stylesheet" href="${this.baseURL + 'style.css'}">`;
-        let HTML = await loadHTML(this.baseURL, `/components/lecteuraudio/index.html`);
+        let HTML = await loadHTML(this.baseURL, `index.html`);
         this.shadowroot.innerHTML = `${STYLE}${HTML}`;
 
         await this.loadPlaylist();

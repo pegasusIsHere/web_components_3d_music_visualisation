@@ -18,7 +18,8 @@ class Visualisation3d extends HTMLElement {
     
     async connectedCallback() {
         const STYLE = `<link rel="stylesheet" href="${this.baseURL + 'style.css'}">`;
-        const HTML = await loadHTML(this.baseURL, '/components/3d-visualisation/index.html');
+        const HTML = await loadHTML(this.baseURL, 'index.html');
+        // console.log(loadHTML())
         // Insert HTML and Canvas into Shadow DOM
         this.shadowRoot.innerHTML = `${STYLE}${HTML}`;
         this.animationGroup = null; // To store the animation group of the model
@@ -48,9 +49,9 @@ class Visualisation3d extends HTMLElement {
     }
 
     // import animted model
-    importModels(scene,camera) {
-
-        BABYLON.SceneLoader.ImportMesh("", this.baseURI+"components/3d-visualisation/models/", "dancer.glb", scene,  (newMeshes, particleSystems, skeletons, animationGroups) =>    {
+    async importModels(scene,camera) {
+        const modelPath = new URL('models/dancer.glb', this.baseURL).href;
+        BABYLON.SceneLoader.ImportMesh("", modelPath, "", scene,  (newMeshes, particleSystems, skeletons, animationGroups) =>    {
             // Set the target of the camera to the first imported mesh
             newMeshes[0].position = new BABYLON.Vector3(0, 0, 0);
             // newMeshes[0].scaling = new BABYLON.Vector3(5,5,5);
