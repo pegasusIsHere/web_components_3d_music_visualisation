@@ -1,19 +1,37 @@
-<html>
-    <head>
-        <title>Logo generator hote</title> 
-        <script src="https://cdn.babylonjs.com/babylon.js"></script>
-        <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logo Generator Host</title>
 
-        <script type="module" src="components/lecteuraudio/script.js"></script>
-        <script type="module" src="components/3d-visualisation/script.js"></script>
-        <script type="module" src="components/playlist/script.js"></script>
-    </head>
-    <body>
+    <!-- BabylonJS -->
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
 
+    <!-- Components -->
+    <script type="module" src="components/lecteuraudio/script.js"></script>
+    <script type="module" src="components/3d-visualisation/script.js"></script>
+    <script type="module" src="components/playlist/script.js"></script>
 
+    <!-- CSS Styling -->
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <h1>Logo Generator Host</h1>
+    <div class="container">
+        <!-- Audio Player -->
         <my-audio-player id="audio-player" src="https://wasabi.i3s.unice.fr/WebAudioPluginBank/BasketCaseGreendayriffDI.mp3"></my-audio-player>
+    
+        <!-- Playlist -->
         <play-list></play-list>
-
+    
+        <!-- 3D Visualisation -->
         <visualisation-3d></visualisation-3d>
-    </body>
+    </div>
+    
+    <footer>
+        © 2024 - Created with ❤️ by Hajar & Ayoub
+    </footer>
+</body>
 </html>

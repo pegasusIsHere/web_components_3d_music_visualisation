@@ -1,0 +1,67 @@
+/* Général : Corps de la page */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+    margin: 0;
+    background-color: #1e1e1e;
+    color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+/* Conteneur principal */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    gap: 20px;
+}
+
+/* Titres principaux */
+h1 {
+    color: #00c6ff;
+    margin-bottom: 20px;
+    font-size: 2em;
+    text-align: center;
+}
+
+/* Composants (audio player, playlist, visualisation 3D) */
+my-audio-player, 
+play-list, 
+visualisation-3d {
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+visualisation-3d {
+    max-width: 800px; /* Plus large pour la visualisation 3D */
+}
+
+/* Footer */
+footer {
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: #aaa;
+    text-align: center;
+}
+
+/* Responsiveness pour les petits écrans */
+@media (max-width: 768px) {
+    my-audio-player, 
+    play-list, 
+    visualisation-3d {
+        max-width: 100%;
+        margin: 0;
+    }
+
+    h1 {
+        font-size: 1.5em;
+        text-align: center;
+    }
+}

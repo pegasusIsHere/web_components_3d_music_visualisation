@@ -1,15 +1,20 @@
-/* :host {
-    display: block;
-    max-width: 400px;
-    margin: auto;
-    font-family: Arial, sans-serif;
-    background-color: #000;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 16px;
-    color: #fff;
-  }
-  
+:host {
+  display: block;
+  max-width: 400px;
+  margin: auto;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #141e30, #243b55);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+* {
+  transition: all 0.3s ease;
+}
+
   h1 {
     text-align: center;
     font-size: 1.2em;
@@ -17,20 +22,22 @@
   }
   
   button {
-    background: none;
-    border: 2px solid #fff;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    border: none;
     color: #fff;
-    padding: 10px;
+    padding: 10px 15px;
     margin: 5px;
     cursor: pointer;
     border-radius: 4px;
-    transition: all 0.2s ease;
-  }
-  
-  button:hover {
-    background-color: #fff;
-    color: #000;
-  }
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
   
   button:disabled {
     opacity: 0.5;
@@ -50,4 +57,21 @@
   progress::-webkit-progress-value {
     background-color: #0073e6;
   }
-   */
+  @media (max-width: 768px) {
+    :host {
+        padding: 10px;
+    }
+
+    button {
+        padding: 8px 12px;
+        font-size: 0.9em;
+    }
+
+    h1 {
+        font-size: 1.2em;
+    }
+}
+visualisation-3d canvas {
+  width: 100%;
+  height: auto;
+}
